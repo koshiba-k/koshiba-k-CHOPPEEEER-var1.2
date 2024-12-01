@@ -43,7 +43,7 @@ def create_test_data():
     
     with open('employee_data.txt', 'w', encoding='utf-8') as f:
         for i in range(200):
-            employee_number = f"227{i + 1:04}"
+            employee_number = f"EMP{i + 1:03}"
             name = names[i]
             department = random.choice(departments)
             phone = f"090-{random.randint(1000, 9999)}-{random.randint(1000, 9999)}"
