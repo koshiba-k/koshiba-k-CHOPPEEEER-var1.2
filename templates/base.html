@@ -1,0 +1,36 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>{% block title %}My App{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="../static/images/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=yes">
+</head>
+<body>
+    <nav>
+        <ul>
+            {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('index') }}">MYページ</a></li>
+                {% if current_user.is_admin %}
+                    <li><a href="{{ url_for('admin') }}">管理者画面</a></li>
+                {% endif %}
+                <li><a href="{{ url_for('logout') }}">ログアウト</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}">ログイン</a></li>
+                <li><a href="{{ url_for('register') }}">サインアップ</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% block header %}
+        
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
+    {% block scripts %}
+    {% endblock %}
+    <scr<script src="https://cdn.tiny.cloud/1/yktw96bumtrufpgfll5m7t05xkwwuu8pnbiwoz4klxeifae1/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+</body>
+</html>

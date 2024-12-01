@@ -1,0 +1,29 @@
+<!-- delete_employee_result.html -->
+{% extends "base.html" %}
+
+{% block title %}社員削除結果{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>社員削除結果</h2>
+    <div class="result-card">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                {% for category, message in messages %}
+                    <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <p><strong>社員番号:</strong> <span>{{ employee_number }}</span></p>
+        <p><strong>氏名:</strong> <span>{{ employee_name }}</span></p>
+        <p><strong>部署:</strong> <span>{{ department_name_jp }}</span></p>
+    </div>
+    <div class="button-group">
+        <a class="btn btn-lightgreen" href="{{ url_for('admin') }}">管理者ダッシュボードに戻る</a>
+        <a class="btn btn-secondary" href="{{ url_for('delete_employee') }}">社員削除に戻る</a>
+    </div>
+</div>
+{% endblock %}
+

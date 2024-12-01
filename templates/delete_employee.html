@@ -1,0 +1,37 @@
+<!-- templates/delete_employee.html -->
+{% extends "base.html" %}
+
+{% block title %}社員削除{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>社員削除</h1>
+        <form method="POST" action="{{ url_for('delete_employee') }}">
+            <input type="text" name="employee_number" placeholder="削除する社員番号" required value="{{ request.form.get('employee_number', '') }}">
+            <button type="submit">検索</button>
+        </form>
+        {% for message in get_flashed_messages() %}
+            <div class="flash-message">{{ message }}</div>
+        {% endfor %}
+        <div class="contain">
+        {% if employee %}
+            <h2>社員情報</h2>
+            <p><strong>社員番号:</strong> {{ employee.employee_number }}</p>
+            <p><strong>氏名:</strong> {{ employee.name }}</p>
+            <p><strong>部署:</strong> {{ department_name_jp }}</p>  <!-- 日本語の部門名を表示 -->
+            <p><strong>電話番号:</strong> {{ employee.phone }}</p>
+            <p><strong>メールアドレス:</strong> {{ employee.email }}</p>
+        
+
+            <!-- 削除フォーム -->
+            <form method="POST" action="{{ url_for('delete_employee') }}" class="delete" onsubmit="return confirm('本当に削除しますか？');">
+                <input type="hidden" name="employee_number" value="{{ employee.employee_number }}">
+                <button type="submit" name="action" value="delete" class="delete-btn">削除</button>
+            </form>
+        {% endif %}
+        </div>
+        <div class="button-group backbottoon_2">
+            <a class="btn btn-secondary" href="{{ url_for('admin') }}">管理者ダッシュボードに戻る</a>
+        </div>
+    </div>
+{% endblock %}

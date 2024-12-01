@@ -1,0 +1,21 @@
+<!-- templates/health_result.html -->
+{% extends "base.html" %}
+
+{% block title %}体調結果{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">体調結果</h2>
+    <div class="result-card">
+        <p><strong>体温:</strong> <span>{{ result_data.temperature }}℃</span></p>
+        <p><strong>喉の状態:</strong> <span>{{ result_data.throat }}</span></p>
+        <p><strong>熱の有無:</strong> <span>{{ result_data.fever }}</span></p>
+        <p><strong>咳の有無:</strong> <span>{{ result_data.cough }}</span></p>
+        <p><strong>選択した部位:</strong> <span>{{ result_data.selected_parts }}</span></p>
+    </div>
+    <div class="button-group">
+        <a class="btn btn-secondary" href="{{ url_for('index') }}">ホームに戻る</a>
+        <a class="btn btn-lightgreen" href="{{ url_for('employee_graph', employee_id=current_user.id) }}">グラフを見る</a>
+    </div>
+</div>
+{% endblock %}

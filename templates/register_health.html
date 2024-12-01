@@ -1,0 +1,307 @@
+<!-- templates/register_health.html -->
+{% extends "base.html" %}
+
+{% block title %}体調登録{% endblock %}
+
+{% block header %}
+    <h1>体調登録</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container-health">
+    <div class="keypad-container">
+        <form id="healthForm" action="{{ url_for('health_result') }}" method="POST">
+            <!-- 体温入力 (電卓形式) -->
+            <div class="temperature-input">
+                <label for="temperature">体温</label>
+                <input type="text" id="temperature" name="temperature" size="5" readonly>
+
+                <div class="keypad">
+                    <button type="button" onclick="addNumber('1')">1</button>
+                    <button type="button" onclick="addNumber('2')">2</button>
+                    <button type="button" onclick="addNumber('3')">3</button>
+                    <button type="button" onclick="addNumber('4')">4</button>
+                    <button type="button" onclick="addNumber('5')">5</button>
+                    <button type="button" onclick="addNumber('6')">6</button>
+                    <button type="button" onclick="addNumber('7')">7</button>
+                    <button type="button" onclick="addNumber('8')">8</button>
+                    <button type="button" onclick="addNumber('9')">9</button>
+                    <button type="button" onclick="addNumber('.')">.</button>
+                    <button type="button" onclick="addNumber('0')">0</button>
+                    <button type="button" onclick="clearInput()">クリア</button>
+                </div>
+            </div>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul class="flash-messages">
+                    {% for message in messages %}
+                    {{ message }}
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+            
+            <!-- のど、熱、咳、だるさのラジオボタン -->
+            <!-- ラジオボタン -->
+            <!-- templates/register_health.html -->
+
+            <fieldset class="radio-2">
+                <legend>のど:</legend>
+                <label><input type="radio" name="throat" value="normal" checked/>正常</label>
+                <label><input type="radio" name="throat" value="sore"/>痛い</label>
+            </fieldset>
+
+            <fieldset class="radio-2">
+                <legend>熱:</legend>
+                <label><input type="radio" name="fever" value="normal" checked/>正常</label>
+                <label><input type="radio" name="fever" value="high"/>高い</label>
+            </fieldset>
+
+            <fieldset class="radio-2">
+                <legend>咳:</legend>
+                <label><input type="radio" name="cough" value="no" checked/>ない</label>
+                <label><input type="radio" name="cough" value="yes"/>ある</label>
+            </fieldset>
+        
+            <div class="body-map">
+                <img src="{{ url_for('static', filename='images/body_front.png') }}" alt="人体模型" style="width: 100%;">
+                <!-- クリック可能な部位を設定 -->
+                <div class="body-part" data-part="頭" 
+                style="border-radius: 50%;
+                        top: 8%; 
+                        left: 33%; 
+                        width: 34%; 
+                        height: 34%;"
+                    >
+                </div>
+                <div class="body-part" 
+                    data-part="胸" 
+                    style="border-radius: 14% 14% 0% 0%;
+                            top: 41%; 
+                            left: 35%; 
+                            width: 13%;
+                            border-left: 25px solid transparent; /* 左斜めの角度を設定 */
+                            border-right: 25px solid transparent; /* 右斜めの角度を設定 */
+                            border-bottom: 45px solid #ffffff00; /* 台形の下部分の色と高さ */
+                            "                        
+                        >
+                </div>
+                <div class="body-part" 
+                    data-part="腹" 
+                    style="top: 55%; 
+                            left: 35%; 
+                            width: 30%; 
+                            height: 12%;"
+                        >
+                </div>
+                <div class="body-part" 
+                    data-part="腰" 
+                    style="top: 67%; 
+                            left: 35%; 
+                            width: 30%; 
+                            height: 8%;"
+                        >
+                </div>
+                <div class="body-part" 
+                    data-part="右肩" 
+                    style="border-radius: 50% 14% 0% 0%;
+                            transform: rotate(23deg);
+                            top: 37%; 
+                            left: 34%; 
+                            width: 7%; 
+                            height: 14%;"
+                        >
+                </div>
+                <div class="body-part" 
+                    data-part="右腕" 
+                    style="border-radius: 70% 14% 150% 256%;
+                            transform: rotate(23deg);
+                            top: 49%; 
+                            left: 28%; 
+                            width: 9%; 
+                            height: 12%;"
+                        >
+                </div>
+                <div class="body-part" 
+                    data-part="右手" 
+                    style="border-radius: 50%;
+                            top: 59%; 
+                            left: 27%; 
+                            width: 6%; 
+                            height: 7%;"
+                        >
+                </div>
+                <div class="body-part" 
+                    data-part="右足" 
+                    style="border-radius:0% 0% 200% 110%;
+                            top: 75%; 
+                            left: 36%; 
+                            width: 9%; 
+                            height: 14%;"
+                        >
+                </div>
+                <div class="body-part" 
+                    data-part="左肩" 
+                    style="border-radius: 14% 50% 0% 0%;
+                            transform: rotate(-23deg);
+                            top: 38%; 
+                            left: 59%; 
+                            width: 7%; 
+                            height: 13%;"
+                        >
+                </div>
+                <div class="body-part" 
+                    data-part="左腕" 
+                    style="border-radius: 14% 70% 256% 150%;
+                            transform: rotate(-23deg);
+                            top: 49%; 
+                            left: 63%; 
+                            width: 8%; 
+                            height: 13%;"
+                        >
+                </div>
+                <div class="body-part" 
+                    data-part="左手" 
+                    style="border-radius: 50%;
+                            top: 59%; 
+                            left: 67%; 
+                            width: 6%; 
+                            height: 7%;"
+                        >
+                </div>
+                <div class="body-part" 
+                    data-part="左足" 
+                    style="border-radius:0% 0% 110% 110%;
+                            top: 75%; 
+                            left: 56%; 
+                            width: 9%; 
+                            height: 14%;"
+                        >
+                </div>
+            </div>
+            <p>体の痛いところをクリックしてね！</p>
+            <ul id="selectedPartsList"></ul>
+                <input type="hidden" id="selectedParts" name="selectedParts" style="text-align: center; font-weight: bold; color: red;">
+            
+            <div class="submit">
+                <button type="submit" class="btn btn-lightgreen">登録</button>
+            </div>
+            <div class="button-group">
+                <a class="btn btn-secondary" href="{{ url_for('index') }}">ホームに戻る</a>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    // 電卓形式の体温入力
+    function addNumber(num) {
+        const inputField = document.getElementById('temperature');
+        inputField.value += num;
+    }
+
+    function clearInput() {
+        document.getElementById('temperature').value = '';
+    }
+
+    // キーボード入力対応
+    document.addEventListener('keydown', (event) => {
+        const validKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
+        const inputField = document.getElementById('temperature');
+
+        // 該当するキーが押された場合
+        if (validKeys.includes(event.key)) {
+            inputField.value += event.key;
+            simulateHover(event.key); // ボタンのホバー効果を適用
+        } else if (event.key === 'Backspace') {
+            inputField.value = inputField.value.slice(0, -1);
+        }
+    });
+
+    // ボタンのホバー効果およびクリック時のエフェクト
+    function simulateHover(key) {
+        const button = Array.from(document.querySelectorAll('.keypad button'))
+            .find(btn => btn.textContent === key);
+        
+        if (button) {
+            button.classList.add('hovered'); // ホバー効果
+            setTimeout(() => button.classList.remove('hovered'), 200); // 200ms後に解除
+        }
+    }
+
+    // クリック時のエフェクトを追加
+    document.querySelectorAll('.keypad button').forEach(button => {
+        button.addEventListener('click', () => {
+            button.classList.add('clicked'); // クリック時の効果
+            setTimeout(() => button.classList.remove('clicked'), 200); // 200ms後に解除
+        });
+    });
+
+    // フォーム送信時のバリデーション
+    document.getElementById('healthForm').addEventListener('submit', (event) => {
+        const temperature = parseFloat(document.getElementById('temperature').value);
+        if (isNaN(temperature) || temperature < 30.0 || temperature > 45.0) {
+            alert('体温は30.0度から45.0度の間で入力してください。');
+            event.preventDefault();
+        }
+    });
+
+    // クリックされた部位を記録
+    const selectedParts = [];
+
+    document.querySelectorAll('.body-part').forEach(part => {
+        part.addEventListener('click', () => {
+            const bodyPart = part.getAttribute('data-part');
+
+            // 部位が既にリストに存在するかチェック
+            if (!selectedParts.includes(bodyPart)) {
+                selectedParts.push(bodyPart);
+                updateSelectedPartsList();
+            }
+        });
+    });
+
+    // 選択された部位のリストを更新
+    function updateSelectedPartsList() {
+        const list = document.getElementById('selectedPartsList');
+        list.innerHTML = ''; // リストをクリア
+
+        selectedParts.forEach((part, index) => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${part} - 悪いと判断しました`;
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = '削除';
+            deleteButton.onclick = () => {
+                selectedParts.splice(index, 1); // 部位リストから削除
+                updateSelectedPartsList();
+            };
+
+            listItem.appendChild(deleteButton);
+            list.appendChild(listItem);
+        });
+
+        // 隠しフィールドに選択された部位をJSONとして設定
+        document.getElementById('selectedParts').value = JSON.stringify(selectedParts);
+    }
+</script>
+
+<style>
+    .body-map {
+        position: relative;
+        max-width: 300px;
+        margin: 20px auto;
+    }
+
+    .body-part {
+        position: absolute;
+        cursor: pointer;
+        opacity: 0.5;
+    }
+
+    .body-part:hover {
+        opacity: 0.8;
+    }
+</style>
+
+{% endblock %}

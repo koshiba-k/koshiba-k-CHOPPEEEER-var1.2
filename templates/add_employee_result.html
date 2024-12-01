@@ -1,0 +1,25 @@
+<!-- templates/add_employee_result.html -->
+{% extends "base.html" %}
+
+{% block title %}登録完了{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">登録完了</h2>
+    <div class="result-card">
+        {% for message in get_flashed_messages() %}
+            <div class="flash-message">{{ message }}</div>
+        {% endfor %}
+        <p><strong>社員番号:</strong> <span>{{ employee.employee_number }}</span></p>
+        <p><strong>部署:</strong> <span>{{ department_name_jp }}</span></p>
+        <p><strong>氏名:</strong> <span>{{ employee.name }}</span></p>
+        <p><strong>電話番号:</strong> <span>{{ employee.phone }}</span></p>
+        <p><strong>メールアドレス:</strong> <span>{{ employee.email }}</span></p>
+        <p><strong>管理者権限:</strong> <span>{{ is_admin }}</span></p>
+    </div>
+    <div class="button-group">
+        <a class="btn btn-secondary" href="{{ url_for('admin') }}">管理者ダッシュボードに戻る</a>
+        <a class="btn btn-lightgreen" href="{{ url_for('add_employee') }}">社員登録ページに戻る</a>
+    </div>
+</div>
+{% endblock %}

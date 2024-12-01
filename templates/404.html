@@ -1,0 +1,16 @@
+<!-- templates/404.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>404 - ページが見つかりません</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>404 - ページが見つかりません</h1>
+        <p>お探しのページは存在しないか、削除された可能性があります。</p>
+        <a href="{{ url_for('login') }}">ログイン画面に戻る</a>
+    </div>
+</body>
+</html>

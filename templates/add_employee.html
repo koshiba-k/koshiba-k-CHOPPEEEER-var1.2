@@ -1,0 +1,94 @@
+<!-- templates/add_employee.html -->
+
+{% extends "base.html" %}
+
+{% block title %}社員登録{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>社員登録</h1>
+    <form method="POST" action="{{ url_for('add_employee') }}">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            {{ form.employee_number.label }} {{ form.employee_number(class="form-control") }}
+            {% if form.employee_number.errors %}
+                {% for error in form.employee_number.errors %}
+                    <div class="flash-message">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.department.label }} {{ form.department(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.name.label }} {{ form.name(class="form-control") }}
+            {% if form.name.errors %}
+                {% for error in form.name.errors %}
+                    <div class="flash-message">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.phone.label }} {{ form.phone(class="form-control") }}
+            {% if form.phone.errors %}
+                {% for error in form.phone.errors %}
+                    <div class="flash-message">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.email.label }} {{ form.email(class="form-control") }}
+            {% if form.email.errors %}
+                {% for error in form.email.errors %}
+                    <div class="flash-message">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label id="adminRightsLabel">管理者権限有無</label>
+            <div class="center">
+                {{ form.is_admin(id="adminRightsCheckbox", style="display:none") }}
+                <label for="adminRightsCheckbox" class="toggle"><span></span></label>
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form.password.label }} {{ form.password(class="form-control", id="password") }}
+            {% if form.password.errors %}
+                {% for error in form.password.errors %}
+                    <div class="flash-message">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.confirm_password.label }} {{ form.confirm_password(class="form-control", id="confirm_password") }}
+            {% if form.confirm_password.errors %}
+                {% for error in form.confirm_password.errors %}
+                    <div class="flash-message">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="form-group show_password_check">
+            <label><input type="checkbox" id="show_password" onclick="togglePasswordVisibility()"> パスワードを表示</label>
+        </div>
+        <button type="submit" class="btn btn-secondary">{{ form.submit.label }}</button>
+    </form>
+    <div class="button-group">
+        <a class="btn btn-secondary" href="{{ url_for('admin') }}">管理者ダッシュボードに戻る</a>
+    </div>
+</div>
+
+<script>
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirm_password');
+        const isChecked = document.getElementById('show_password').checked;
+        passwordInput.type = isChecked ? 'text' : 'password';
+        confirmPasswordInput.type = isChecked ? 'text' : 'password';
+    }
+
+    document.getElementById('adminRightsCheckbox').addEventListener('change', function() {
+        document.getElementById('adminRightsInput').value = this.checked ? 'true' : 'false';
+    });
+</script>
+{% endblock %}

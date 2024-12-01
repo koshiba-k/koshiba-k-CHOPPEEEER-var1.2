@@ -1,0 +1,81 @@
+<!-- templates/manage_announcements.html -->
+{% extends "base.html" %}
+{% block title %}お知らせ管理{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4 text-center">お知らせ管理</h1>
+    {% for message in get_flashed_messages() %}
+        <div class="flash-message">{{ message }}</div>
+    {% endfor %}
+    <!-- New announcement form -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form action="{{ url_for('manage_announcements') }}" method="POST">
+                <div class="form-group">
+                    <label for="title">タイトル</label>
+                    <input type="text" name="title" id="title" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="content">内容</label>
+                    <!-- Add the name attribute to the textarea -->
+                    <textarea name="content" id="content" class="content form-control" rows="5"></textarea>
+                </div>
+                <button type="submit" class="btn btn-info mt-3">お知らせを追加</button>
+                <a class="btn btn-secondary" href="{{ url_for('admin') }}">管理者ダッシュボードに戻る</a>
+            </form>
+        </div>
+    </div>
+
+    <!-- Existing announcements list -->
+    <h2 class="text-center">既存のお知らせ</h2>
+    <ul class="list-group mb-4">
+        {% for announcement in announcements %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <h5>{{ announcement.title }}</h5>
+                    <p>{{ announcement.content|safe }}</p>
+                    <small class="text-muted">投稿日: {{ announcement.date.strftime('%Y-%m-%d') }}</small>
+                </div>
+                <form action="{{ url_for('delete_announcement', id=announcement.id) }}" method="POST" onsubmit="return confirm('本当に削除しますか？');">
+                    <button type="submit" class="delete-btn">削除</button>
+                </form>
+            </li>
+        {% else %}
+            <p class="list-group-item text-center">現在お知らせはありません。</p>
+        {% endfor %}
+    </ul>
+</div>
+
+<script src="https://cdn.tiny.cloud/1/yktw96bumtrufpgfll5m7t05xkwwuu8pnbiwoz4klxeifae1/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: 'textarea',
+        plugins: [
+            // 必要なプラグインを追加
+            'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+            'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate'
+        ],
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+        language: 'ja',  // 日本語に設定
+        paste_as_text: true,
+        mergetags_list: [
+            { value: 'First.Name', title: 'First Name' },
+            { value: 'Email', title: 'Email' },
+        ],
+        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+        exportpdf_converter_options: { 'format': 'Letter', 'margin_top': '1in', 'margin_right': '1in', 'margin_bottom': '1in', 'margin_left': '1in' },
+        exportword_converter_options: { 'document': { 'size': 'Letter' } },
+        importword_converter_options: { 'formatting': { 'styles': 'inline', 'resets': 'inline',	'defaults': 'inline', } },
+
+        setup: function(editor) {
+            editor.on('change', function() {
+                // 変更時にtextareaの内容を更新
+                tinymce.activeEditor.save();
+            });
+        },
+    });
+</script>
+{% endblock %}

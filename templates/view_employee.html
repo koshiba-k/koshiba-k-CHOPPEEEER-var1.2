@@ -1,0 +1,112 @@
+<!-- templates/view_employee.html -->
+{% extends "base.html" %}
+
+{% block title %}社員情報一覧{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>社員情報一覧</h1>
+
+        <!-- 検索フォーム -->
+        <form method="GET" action="{{ url_for('view_employee') }}" id="employee-search-form" class="d-flex align-items-center mb-3">
+            <div class="input-group mb-3 mr-2">
+                <input type="text" class="form-control" placeholder="社員番号、名前, 部署で検索" name="query" value="{{ request.args.get('query', '') }}" style="max-width: 400px;">
+            </div>
+            <!-- 日にち検索 -->
+            <div class="input-group mb-3 mr-2">
+                <input type="date" class="form-control" id="date-input" name="date" value="{{ request.args.get('date', today) }}" style="max-width: 400px;">
+            </div>
+
+            <div class="input-group mb-3  selectbox-1">
+                <select class="form-select" name="filter" style="max-width: 200px;">
+                    <option value="all" {% if filter_option == 'all' %}selected{% endif %}>全員</option>
+                    <option value="unregistered" {% if filter_option == 'unregistered' %}selected{% endif %}>未登録者</option>
+                    <option value="unwell" {% if filter_option == 'unwell' %}selected{% endif %}>体調不良者</option>
+                    <option value="healthy" {% if filter_option == 'healthy' %}selected{% endif %}>正常な社員</option>
+                </select>
+            </div>
+            <div class="search">
+                <button class="btn btn-primary" type="submit">検索</button>
+            </div>
+        </form>
+        
+
+        <!-- 結果表示テーブル -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>社員番号</th>
+                    <th>氏名</th>
+                    <th>部署</th>
+                    <th>登録状況</th>
+                    <th>アクション</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in employees %}
+                <tr 
+                    {% if employee.flag == 2 %}
+                        style="background-color: #fff3cd;"
+                    {% elif employee.flag == 1 %}
+                        style="background-color: #f8d7da;"
+                    {% elif employee.flag == 0 %}
+                        style="background-color: #d4edda;"
+                    {% endif %}
+                >
+                    <td>{{ employee.employee_number }}</td>
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.department_name }}</td>
+                    <td style="text-align: center;">
+                        {% if employee.flag == 2  %}
+                            <span class="text-muted">未登録</span>
+                        {% elif employee.flag == 1 %}
+                            <span class="text-danger">体調不良</span>
+                        {% elif employee.flag == 0 %}
+                            <span class="text-success">正常</span>
+                        {% endif %}
+                    </td>
+                    <td style="text-align: center;">
+                        <a href="{{ url_for('employee_graph', employee_id=employee.id) }}" class="btn btn-primary">体温グラフを見る</a>
+                        <a href="{{ url_for('change_info', employee_id=employee.id) }}" class="btn btn-secondary">基本情報変更</a>
+                        <a href="{{ url_for('change_password', employee_id=employee.id) }}" class="btn btn-warning">パスワード変更</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+        
+        {% for message in get_flashed_messages() %}
+            <div class="flash-message">{{ message }}</div>
+        {% endfor %}
+    </div>
+    <style>
+        #employee-search-form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        #employee-search-form .input-group {
+            margin-bottom:0px;
+        }
+
+        @media (max-width: 768px) {
+            #employee-search-form {
+                flex-direction: column;
+                align-items: center;
+                gap: 0px;
+            }
+
+            #employee-search-form .input-group {
+                margin-bottom: 0px;
+            }
+
+            #employee-search-form .mr-2 {
+                margin-right: 0;
+            }
+        }
+    </style>
+
+{% endblock %}

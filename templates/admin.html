@@ -1,0 +1,78 @@
+<!-- templates/admin.html -->
+{% extends "base.html" %}
+{% block title %}管理者ページ{% endblock %}
+
+{% block content %}
+<div class="container admin-dashboard">
+    <h1 class="mb-4 text-center">管理者ダッシュボード</h1>
+
+    <!-- Dashboard cards -->
+    <div class="row text-center">
+        <!-- 社員閲覧ボタン -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <h3 class="card-title">
+                        <i class="fas fa-user-plus"></i> 社員閲覧
+                    </h3>
+                    <p class="card-text">新しい社員を登録してチームを拡大しましょう。</p>
+                    <a href="{{ url_for('view_employee') }}" class="btn btn-primary btn-lg">社員閲覧</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 社員登録ボタン -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <h3 class="card-title">
+                        <i class="fas fa-user-plus"></i> 社員登録
+                    </h3>
+                    <p class="card-text">新しい社員を登録してチームを拡大しましょう。</p>
+                    <a href="{{ url_for('add_employee') }}" class="btn btn-success btn-lg">社員登録</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 社員削除ボタン -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <h3 class="card-title">
+                        <i class="fas fa-user-plus"></i> 社員削除
+                    </h3>
+                    <p class="card-text">新しい社員を登録してチームを拡大しましょう。</p>
+                    <a href="{{ url_for('delete_employee') }}" class="btn btn-danger btn-lg">社員削除</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- お知らせ管理ボタン -->
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <h3 class="card-title">
+                        <i class="fas fa-user-plus"></i> お知らせ管理
+                    </h3>
+                    <p class="card-text">新しい社員を登録してチームを拡大しましょう。</p>
+                    <a href="{{ url_for('manage_announcements') }}" class="btn btn-info btn-lg">お知らせ管理</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick statistics -->
+    <div class="row mt-4">
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="alert alert-success text-center">
+                <strong>総社員数:</strong> {{ total_employees }}
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="alert alert-warning text-center">
+                <strong>管理者:</strong> {{ total_admins }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

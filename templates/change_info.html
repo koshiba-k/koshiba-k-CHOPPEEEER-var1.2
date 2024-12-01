@@ -1,0 +1,54 @@
+<!-- templates/change_info.html -->
+{% extends "base.html" %}
+
+{% block title %}基本情報変更{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>社員情報変更</h1>
+    {% for message in get_flashed_messages() %}
+        <div class="flash-message">{{ message }}</div>
+    {% endfor %}
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label>{{ form.employee_id.label }}</label>
+            {{ form.employee_id(size=20, class_="form-control") }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.department.label }}</label>
+            {{ form.department(class_="form-control") }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.name.label }}</label>
+            {{ form.name(size=20, class_="form-control") }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.phone.label }}</label>
+            {{ form.phone(size=20, class_="form-control") }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.email.label }}</label>
+            {{ form.email(size=20, class_="form-control") }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.admin_rights.label }}</label>
+            <div class="center">
+                {{ form.admin_rights(id="adminRightsCheckbox", style="display:none") }} <!-- 隠されたチェックボックス -->
+                <label for="adminRightsCheckbox" class="toggle"><span></span></label> <!-- カスタムスイッチ -->
+            </div>
+        </div>
+        
+        <div class="form-group-btn">
+            {{ form.submit(class_="btn btn-lightgreen") }}
+        </div>
+        
+    </form>
+    <div class="btn-2">
+        <div class="button-group">
+            <a class="btn btn-secondary" href="{{ url_for('view_employee') }}">社員情報一覧に戻る</a>
+        </div>
+    </div>
+    
+</div>
+{% endblock %}

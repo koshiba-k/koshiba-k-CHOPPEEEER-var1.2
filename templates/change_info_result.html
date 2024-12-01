@@ -1,0 +1,22 @@
+<!-- templates/change_info_result.html -->
+{% extends "base.html" %}
+
+{% block title %}変更完了{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">変更完了</h2>
+    <div class="result-card">
+        <p><strong>社員番号:</strong> <span>{{ employee.employee_number }}</span></p>
+        <p><strong>部署:</strong> <span>{{ department_name }}</span></p>
+        <p><strong>氏名:</strong> <span>{{ employee.name }}</span></p>
+        <p><strong>電話番号:</strong> <span>{{ employee.phone }}</span></p>
+        <p><strong>メールアドレス:</strong> <span>{{ employee.email }}</span></p>
+        <p><strong>管理者権限:</strong> <span>{{ "あり" if employee.is_admin else "なし" }}</span></p>
+    </div>
+    <div class="button-group">
+        <a class="btn btn-secondary" href="{{ url_for('admin') }}">管理者ダッシュボードに戻る</a>
+        <a class="btn btn-lightgreen"href="{{ url_for('view_employee') }}">社員情報一覧に戻る</a>
+    </div>
+</div>
+{% endblock %}

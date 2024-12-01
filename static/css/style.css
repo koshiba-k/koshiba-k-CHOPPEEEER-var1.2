@@ -1,0 +1,834 @@
+/* 共通スタイル */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e6f7e6;
+    color: #333;
+}
+
+/* コンテナの上部余白 */
+.container {
+    width: 70%;
+    margin: 150px auto; 
+    padding: 40px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 見出し */
+h1, h2 {
+    color: #2e7d32;
+    text-align: center;
+}
+
+/* フォーム */
+form {
+    margin: 20px 0;
+    text-align: center;
+}
+/* ナビゲーションバー */
+nav {
+    background-color: #4CAF50; /* ナビゲーションバーの背景色 */
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-start; /* 左寄せ */
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    display: block;
+    border-radius: 5px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    background-color: #45a049; /* ホバー時の色 */
+}
+
+input {
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #a5d6a7;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+select {
+    width: 70%;
+}
+
+.period{
+    width: auto;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 70%;
+    box-sizing: border-box;
+}
+
+button, .btn {
+    width: auto;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+}
+
+button:hover {
+    background-color: #689f38;
+}
+
+.button-group{
+    text-align: center;
+}
+
+.delete-btn {
+    background-color: #f03f0e;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 1.2rem;
+}
+
+.delete-btn:hover {
+    background-color: #882613;
+}
+
+/* 全体を中央に配置するコンテナ */
+.container-health {
+    width: 70%;
+    margin: 79px auto; 
+    padding: 40px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center; /* 水平方向に中央揃え */
+}
+
+#healthForm .submit{
+    margin-bottom: 20px;
+}
+/* キーパッドを囲む要素 */
+.keypad-container {
+    text-align: center;
+}
+
+/* 電卓形式のキーパッド */
+.keypad {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3列のグリッド */
+    gap: 10px; /* ボタン間の余白 */
+    margin-top: 20px;
+}
+
+.keypad button {
+    width: 100%;
+    font-size: 1.1em;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #aed581;
+    border: 1px solid #8bc34a;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* ホバーおよびクリック時の視覚効果 */
+.keypad button.hovered,
+.keypad button.clicked {
+    background-color: #62d93d; /* ホバーとクリックで共通の色 */
+    transform: scale(1.1); /* 拡大効果 */
+    transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+/* 体温入力フィールド */
+.temperature-input {
+    margin-bottom: 20px;
+}
+
+/* 体調登録ページの選択部分 */
+.radio-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.3em 2em;
+    margin-bottom: 10px;
+}
+
+.radio-2 label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0 0.5em;
+    cursor: pointer;
+}
+
+.radio-2  input{
+    text-align: center;
+    display: none;
+}
+
+.radio-2 label::before {
+    content: '';
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    border: 2px solid #8bc34a;
+    box-sizing: border-box;
+    margin-right: 5px;
+}
+
+.radio-2 label:has(:checked)::before {
+    background-color: #7cb342;
+}
+
+/* 選択された部位のリスト */
+#selectedPartsList {
+    list-style: none;
+    padding: 0;
+}
+
+#selectedPartsList li {
+    margin-bottom: 10px;
+    color: #33691e;
+}
+
+#selectedPartsList button {
+    background-color: #7cb342;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+#selectedPartsList button:hover {
+    background-color: #558b2f;
+}
+
+/* ボディマップ */
+.body-map {
+    position: relative;
+    max-width: 300px;
+    margin: 20px auto;
+}
+
+.body-part {
+    position: absolute;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.body-part:hover {
+    opacity: 0.8;
+}
+
+.contain{
+    margin: 0 30%;
+}
+
+
+.table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.table th {
+    background-color: #2980b9;
+    color: #fff;
+}
+
+.table tr:hover {
+    background-color: #f1f1f1;
+}
+
+a.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+a.btn-primary, a.btn-success, a.btn-danger, a.btn-warning, a.btn-info {
+    background-color: #4CAF50;
+}
+
+a.btn-secondary{
+    background-color: #3498db;
+}
+
+a.btn-warning {
+    background-color: #f39c12;
+}
+
+a.btn:hover {
+    opacity: 0.8;
+}
+
+/* 検索フォームのスタイル */
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.input-group .form-control {
+    flex: 1;
+    max-width: 97%;
+}
+
+.input-group .btn {
+    margin-left: 10px;
+}
+.period-select-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.period-select-group label {
+    margin: 0;
+}
+
+.period-select-group select {
+    display: inline-block;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+.form-control {
+    width: 97%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+select.form-control {
+    height: 40px;
+    width: 70%;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.btn-lightgreen {
+    background-color: #7cb342;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.btn-lightgreen:hover {
+    background-color: #101410;
+}
+
+.text-danger, .flash-message {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border-radius: 5px;
+    list-style:none;
+}
+
+.center {
+    position: relative;
+    display: inline-block;
+}
+
+.toggle {
+    position: relative;
+    display: block;
+    width: 40px;
+    height: 20px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transform: translate3d(0, 0, 0);
+}
+
+.toggle:before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 34px;
+    height: 14px;
+    background: #9A9999;
+    border-radius: 8px;
+    transition: background .2s ease;
+}
+
+.toggle span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(154, 153, 153, .5);
+    transition: all .2s ease;
+}
+
+input[type="checkbox"]:checked + .toggle:before {
+    background: #326341; /* 明るい青 */
+}
+
+input[type="checkbox"]:checked + .toggle span {
+    background: #76c776;
+    transform: translateX(20px);
+    transition: all .2s cubic-bezier(.8,.4,.3,1.25), background .15s ease;
+    box-shadow: 0 3px 8px rgba(118, 199, 118, .2);
+}
+
+input[type="checkbox"]:checked + .toggle span:before {
+    transform: scale(1);
+    opacity: 0;
+    transition: all .4s ease;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    position: relative;
+}
+
+.checkbox-group input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background-color: #ffffff;
+    border: 2px solid #4CAF50;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+}
+
+.checkbox-group input[type="checkbox"]:checked {
+    background-color: #4CAF50; 
+}
+
+.checkbox-group input[type="checkbox"]::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 6px;
+    width: 4px;
+    height: 10px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    display: none;
+}
+
+.checkbox-group input[type="checkbox"]:checked::after {
+    display: block;
+}
+
+.checkbox-group label {
+    font-size: 14px;
+    color: #333;
+}
+
+.show_password_check {
+    text-align: right;
+    margin-right: 15%;
+}
+
+/* 管理者ダッシュボード専用のスタイル */
+.admin-dashboard .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.admin-dashboard .col-md-3 {
+    width: 23%;
+}
+
+/* カードのデザイン */
+.admin-dashboard .card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* マウスホバー時のアニメーション */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.admin-dashboard .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* カードのタイトル */
+.admin-dashboard .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* カードの説明 */
+.admin-dashboard .card-text {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.admin-dashboard .btn:hover {
+    background-color: #45a049;
+}
+
+/* 統計情報のスタイル */
+.admin-dashboard .alert {
+    font-size: 1.2rem;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+}
+
+.main-page{
+    width: 59%;
+    padding:3% 8%;
+}
+.main-page .alert-warning.custom-announcements {
+    border: 2px solid #73d076;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.main-page .announcement-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 10px;
+}
+
+.main-page .announcement-item {
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #eaf4e5;
+    margin-top: 10px;
+}
+
+.main-page .announcement-item-title {
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: bold;
+    border-bottom: 2px solid #706868;
+}
+
+.main-page .announcement-item-content {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.main-page .announcement-item-date {
+    font-size: 0.9rem;
+    color: #888;
+    display: block;
+    margin-top: 10px;
+}
+
+.bg-warning {
+    background-color: #ffeb3b;
+}
+
+.search {
+    padding-top: 20px;
+}
+
+.selectbox-1 {
+    position: relative;
+}
+
+.selectbox-1::before,
+.selectbox-1::after {
+    position: absolute;
+    content: '';
+    pointer-events: none;
+}
+
+.selectbox-1::before {
+    display: inline-block;
+    right: 0;
+    width: 2.8em;
+    height: 2.8em;
+    border-radius: 0 3px 3px 0;
+    background-color: #45a049;
+}
+
+.selectbox-1::after {
+    position: absolute;
+    top: 50%;
+    right: 1.4em;
+    transform: translate(50%, -50%) rotate(45deg);
+    width: 6px;
+    height: 6px;
+    border-bottom: 3px solid #fff;
+    border-right: 3px solid #fff;
+}
+
+.selectbox-1 select {
+    appearance: none;
+    min-width: 230px;
+    height: 2.8em;
+    padding: .4em 3.6em .4em .8em;
+    border: none;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    color: #333;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.selectbox-1 select:focus {
+    outline: 2px solid #45a049;
+}
+
+/* レスポンシブデザイン - モバイルに適した表示 */
+@media (max-width: 768px) {
+    .main-page{
+        width: 80%;
+        padding:5%;
+    }
+    .container {
+        /* width: 90%; */
+        margin: 20% auto;
+        /* padding: 40px 10px; */
+    }
+
+    nav{
+        margin-bottom: 10%;
+    }
+
+    nav ul {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 0 8px;
+    }
+
+    nav ul li a {
+        font-size: 1em;
+        padding: 10px;
+    }
+
+    input, button {
+        font-size: 1em;
+        padding: 8px;
+        display: inline-block;  
+    }
+
+    form {
+        margin: 15px 0;
+        text-align: center;
+    }
+
+    .table th, .table td {
+        padding: 6px;
+        font-size: 0.9em;
+    }
+    h1, h2 {
+        text-align: center;
+    }
+
+    button{
+        /* width: 20%; */
+        box-sizing: border-box;
+        margin-bottom: 5%;
+    }
+
+    .form-group{
+        text-align: right;
+    }
+
+    /* 電卓形式のキーパッド調整 */
+    .keypad {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+    }
+
+    .keypad button{
+        width: 80%;
+    }
+
+    .body-map {
+        max-width: 90%;
+    }
+
+    dd{
+        margin-right: 0px;
+    }
+    
+    a.btn{
+        width: auto;
+    }
+    
+    /* 体温グラフ */
+    .temperatureChart{
+        height:800px;
+    }
+
+    .card-body {
+        padding: 2%;
+        margin-bottom: 5%;
+    }
+
+    .form-group{
+        text-align: center;
+    }
+
+    .form-group input{
+        text-align: center;
+    }
+
+    .form-group btn{
+        text-align: center;
+    }
+
+    
+    .backbottoon_2{
+        text-align: center;
+    }
+
+    .mb-3 button{
+        padding-top: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .table thead {
+        display: none;
+    }
+
+    .table tbody tr {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 0.25rem;
+        padding: 1rem;
+    }
+
+    .table tbody td {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+    .table tbody td a.btn {
+        display: flex;
+        width: 80%;
+        margin-bottom: 10px;
+        text-align: center;
+        justify-content: center; 
+    }
+
+    /* 部署名の文字サイズを調整 */
+    td:nth-child(4) {
+        font-size: 0.9rem;
+    }
+    .form-group-btn{
+        text-align: center;
+    }
+    .btn-2{
+        text-align: center;
+    }
+    
+    .admin-dashboard .row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .admin-dashboard .col-md-3 {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .admin-dashboard .alert {
+        font-size: 1rem;
+    }
+    .main-page .announcement-item {
+        padding: 10px;
+    }
+
+    .main-page .announcement-title {
+        font-size: 1.3rem;
+    }
+
+    .main-page .announcement-item-title {
+        font-size: 1rem;
+    }
+
+    .main-page .announcement-item-content {
+        font-size: 0.95rem;
+    }
+
+    .radio-2  input{
+        text-align: center;
+    }
+
+    .delete-btn{
+        padding: 10px 10px;
+    }
+}
